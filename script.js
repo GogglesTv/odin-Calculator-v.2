@@ -68,7 +68,12 @@ numbers.forEach((number) => {
 operators.forEach((operator) => {
   operator.addEventListener("click", () => {
     operator.style.backgroundColor = "#6a6a6a";
-    operation = operator.textContent;
+    if (operator.textContent === "x") {
+      operation = "*";
+    } else {
+      operation = operator.textContent;
+    }
+    console.log(operation);
     num1 = parseInt(displayStr);
     resetDisplay();
   });
