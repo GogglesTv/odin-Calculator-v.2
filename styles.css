@@ -48,6 +48,7 @@ div.container > button {
 
 div.container > button:hover {
   cursor: pointer;
+  background-color: #6a6a6a;
 }
 
 div.container > button.zero {
