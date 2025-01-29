@@ -35,7 +35,7 @@ function operate(operation, num1, num2) {
     return add(num1, num2);
   } else if (operation === "-") {
     return subtract(num1, num2);
-  } else if (operation === "*") {
+  } else if (operation === "x") {
     return multiply(num1, num2);
   } else {
     return divide(num1, num2);
@@ -68,11 +68,7 @@ numbers.forEach((number) => {
 operators.forEach((operator) => {
   operator.addEventListener("click", () => {
     operator.style.backgroundColor = "#6a6a6a";
-    if (operator.textContent === "x") {
-      operation = "*";
-    } else {
-      operation = operator.textContent;
-    }
+    operation = operator.textContent;
     console.log(operation);
     num1 = parseInt(displayStr);
     resetDisplay();
