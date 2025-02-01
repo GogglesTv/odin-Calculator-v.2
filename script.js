@@ -9,6 +9,7 @@ const display = document.querySelector(".display");
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
+const decimal = document.querySelector(".decimal");
 
 function add(num1, num2) {
   let sum = num1 + num2;
@@ -45,6 +46,7 @@ function operate(operation, num1, num2) {
 function resetDisplay() {
   displayStr = "";
   display.textContent = "0";
+  decimal.disabled = false;
 }
 
 function resetOperatorColor() {
@@ -58,10 +60,7 @@ numbers.forEach((number) => {
     const numberValue = number.getAttribute("data-value");
     displayStr += numberValue;
     display.textContent = displayStr;
-
-    if (num1 !== undefined) {
-      num2 = parseInt(displayStr);
-    }
+    num2 = parseFloat(displayStr);
   });
 });
 
@@ -70,7 +69,8 @@ operators.forEach((operator) => {
     operator.style.backgroundColor = "#6a6a6a";
     operation = operator.textContent;
     console.log(operation);
-    num1 = parseInt(displayStr);
+    num1 = parseFloat(displayStr);
+
     resetDisplay();
   });
 });
@@ -78,7 +78,23 @@ operators.forEach((operator) => {
 equals.addEventListener("click", () => {
   resetOperatorColor();
   displayStr = operate(operation, num1, num2);
+  console.log(displayStr);
+
+  if (displayStr % 1 !== 0) {
+    displayStr = 1 * parseFloat(displayStr).toFixed(3);
+    display.textContent = displayStr;
+  }
+
   display.textContent = displayStr;
+});
+
+decimal.addEventListener("click", () => {
+  if (displayStr % 1 === 0) {
+    displayStr += ".";
+    display.textContent = displayStr;
+  }
+  decimal.disabled = "true";
+  console.log(decimal);
 });
 
 console.log(numbers);
