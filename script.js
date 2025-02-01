@@ -90,8 +90,13 @@ equals.addEventListener("click", () => {
 
 decimal.addEventListener("click", () => {
   if (displayStr % 1 === 0) {
-    displayStr += ".";
-    display.textContent = displayStr;
+    if (displayStr === "") {
+      displayStr = "0.";
+      display.textContent = displayStr;
+    } else {
+      displayStr += ".";
+      display.textContent = displayStr;
+    }
   }
   decimal.disabled = "true";
   console.log(decimal);
