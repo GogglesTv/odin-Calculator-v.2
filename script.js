@@ -10,6 +10,7 @@ const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
 const decimal = document.querySelector(".decimal");
+const allClear = document.querySelector(".clear");
 
 function add(num1, num2) {
   let sum = num1 + num2;
@@ -69,6 +70,11 @@ operators.forEach((operator) => {
     operator.style.backgroundColor = "#6a6a6a";
     operation = operator.textContent;
     console.log(operation);
+
+    if (displayStr === "") {
+      displayStr = "0";
+    }
+
     num1 = parseFloat(displayStr);
 
     resetDisplay();
@@ -102,4 +108,8 @@ decimal.addEventListener("click", () => {
   console.log(decimal);
 });
 
-console.log(numbers);
+allClear.addEventListener("click", () => {
+  resetDisplay();
+  resetOperatorColor();
+  num1 = 0;
+});
