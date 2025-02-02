@@ -10,6 +10,7 @@ const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
 const decimal = document.querySelector(".decimal");
+const neg = document.querySelector(".neg");
 const allClear = document.querySelector(".clear");
 
 function add(num1, num2) {
@@ -104,17 +105,27 @@ decimal.addEventListener("click", () => {
     } else if (num1 !== "") {
       displayStr = "0.";
       display.textContent = displayStr;
+      decimal.disabled = "true";
     } else {
       displayStr += ".";
       display.textContent = displayStr;
       decimal.disabled = "true";
     }
   }
-  console.log(decimal);
 });
 
 allClear.addEventListener("click", () => {
   resetDisplay();
   resetOperatorColor();
   num1 = 0;
+});
+
+neg.addEventListener("click", () => {
+  if (!displayStr.toString().includes("-")) {
+    displayStr = parseFloat("-" + displayStr);
+    display.textContent = displayStr;
+  } else {
+    displayStr = parseFloat(displayStr.toString().substring(1));
+    display.textContent = displayStr;
+  }
 });
