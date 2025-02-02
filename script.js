@@ -99,12 +99,17 @@ decimal.addEventListener("click", () => {
     if (displayStr === "") {
       displayStr = "0.";
       display.textContent = displayStr;
+      console.log(displayStr);
+      decimal.disabled = "true";
+    } else if (num1 !== "") {
+      displayStr = "0.";
+      display.textContent = displayStr;
     } else {
       displayStr += ".";
       display.textContent = displayStr;
+      decimal.disabled = "true";
     }
   }
-  decimal.disabled = "true";
   console.log(decimal);
 });
 
