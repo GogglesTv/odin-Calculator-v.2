@@ -11,6 +11,7 @@ const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector(".equals");
 const decimal = document.querySelector(".decimal");
 const neg = document.querySelector(".neg");
+const percent = document.querySelector(".percentage");
 const allClear = document.querySelector(".clear");
 
 function add(num1, num2) {
@@ -102,7 +103,7 @@ decimal.addEventListener("click", () => {
       display.textContent = displayStr;
       console.log(displayStr);
       decimal.disabled = "true";
-    } else if (num1 !== "") {
+    } else if (num2 === "") {
       displayStr = "0.";
       display.textContent = displayStr;
       decimal.disabled = "true";
@@ -128,4 +129,10 @@ neg.addEventListener("click", () => {
     displayStr = parseFloat(displayStr.toString().substring(1));
     display.textContent = displayStr;
   }
+});
+
+percent.addEventListener("click", () => {
+  display.textContent = displayStr + "%";
+  displayStr = parseFloat("." + displayStr);
+  console.log(typeof displayStr, displayStr);
 });
