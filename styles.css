@@ -52,6 +52,5 @@ div.container > button:hover {
 }
 
 div.container > button.zero {
-  grid-column: 1 / 3;
   width: 100%;
 }
