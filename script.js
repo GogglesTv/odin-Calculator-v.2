@@ -12,6 +12,7 @@ const equals = document.querySelector(".equals");
 const decimal = document.querySelector(".decimal");
 const neg = document.querySelector(".neg");
 const percent = document.querySelector(".percentage");
+const bkSpace = document.querySelector(".bkspace");
 const allClear = document.querySelector(".clear");
 
 function add(num1, num2) {
@@ -52,7 +53,8 @@ function resetDisplay() {
   decimal.disabled = false;
 }
 
-function resetOperatorColor() {
+function resetOperator() {
+  operation = "";
   operators.forEach((operator) => {
     operator.style.backgroundColor = "";
   });
@@ -84,7 +86,6 @@ operators.forEach((operator) => {
 });
 
 equals.addEventListener("click", () => {
-  resetOperatorColor();
   displayStr = operate(operation, num1, num2);
   console.log(displayStr);
 
@@ -94,6 +95,7 @@ equals.addEventListener("click", () => {
   }
 
   display.textContent = displayStr;
+  resetOperator();
 });
 
 decimal.addEventListener("click", () => {
@@ -117,7 +119,7 @@ decimal.addEventListener("click", () => {
 
 allClear.addEventListener("click", () => {
   resetDisplay();
-  resetOperatorColor();
+  resetOperator();
   num1 = 0;
 });
 
@@ -135,4 +137,16 @@ percent.addEventListener("click", () => {
   display.textContent = displayStr + "%";
   displayStr = parseFloat("." + displayStr);
   console.log(typeof displayStr, displayStr);
+});
+
+bkSpace.addEventListener("click", () => {
+  console.log(displayStr);
+
+  if (displayStr.length === 1) {
+    resetDisplay();
+  } else {
+    displayStr = displayStr.slice(0, -1);
+    display.textContent = displayStr;
+  }
+  console.log(displayStr);
 });
