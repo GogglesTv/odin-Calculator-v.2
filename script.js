@@ -2,6 +2,7 @@
 
 let num1;
 let num2;
+let result;
 let operation = "";
 let displayStr = "";
 
@@ -63,9 +64,24 @@ function resetOperator() {
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
     const numberValue = number.getAttribute("data-value");
-    displayStr += numberValue;
-    display.textContent = displayStr;
-    num2 = parseFloat(displayStr);
+
+    if (num1 !== "") {
+      if (result !== "") {
+        result = "";
+        resetDisplay();
+        displayStr += numberValue;
+        display.textContent = displayStr;
+        num2 = parseFloat(displayStr);
+      } else {
+        displayStr += numberValue;
+        display.textContent = displayStr;
+        num2 = parseFloat(displayStr);
+      }
+    } else {
+      displayStr += numberValue;
+      display.textContent = displayStr;
+      num1 = parseFloat(displayStr);
+    }
   });
 });
 
@@ -86,12 +102,15 @@ operators.forEach((operator) => {
 });
 
 equals.addEventListener("click", () => {
-  displayStr = operate(operation, num1, num2);
-  console.log(displayStr);
+  if (operation !== "") {
+    displayStr = operate(operation, num1, num2);
+    result = operate(operation, num1, num2);
+    console.log(num1, operation, num2, "=", result);
 
-  if (displayStr % 1 !== 0) {
-    displayStr = 1 * parseFloat(displayStr).toFixed(3);
-    display.textContent = displayStr;
+    if (displayStr % 1 !== 0) {
+      displayStr = 1 * parseFloat(displayStr).toFixed(3);
+      display.textContent = displayStr;
+    }
   }
 
   display.textContent = displayStr;
