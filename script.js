@@ -69,11 +69,17 @@ numbers.forEach((number) => {
 
     if (num1 !== "") {
       if (result !== "") {
-        result = "";
-        resetDisplay();
-        displayStr += numberValue;
-        display.textContent = displayStr;
-        num2 = parseFloat(displayStr);
+        if (displayStr.includes(".")) {
+          displayStr += numberValue;
+          display.textContent = displayStr;
+          num2 = parseFloat(displayStr);
+        } else {
+          result = "";
+          resetDisplay();
+          displayStr += numberValue;
+          display.textContent = displayStr;
+          num2 = parseFloat(displayStr);
+        }
       } else {
         displayStr += numberValue;
         display.textContent = displayStr;
@@ -101,20 +107,15 @@ operators.forEach((operator) => {
 });
 
 equals.addEventListener("click", () => {
+  console.log(num1);
   if (operation !== "") {
     if (percentProb === true) {
       if (percentNum === num2) {
         num2 = (num1 / 100) * num2;
         displayStr = operate(operation, num1, num2);
         result = operate(operation, num1, num2);
-        if (displayStr % 1 !== 0) {
-          displayStr = 1 * parseFloat(displayStr).toFixed(3);
-          display.textContent = displayStr;
-        }
-      } else if (percentNum === num1) {
-        num1 = (num2 / 100) * num1;
-        displayStr = operate(operation, num1, num2);
-        result = operate(operation, num1, num2);
+        console.log(num1, operation, num2, "=", result);
+        percentProb = false;
         if (displayStr % 1 !== 0) {
           displayStr = 1 * parseFloat(displayStr).toFixed(3);
           display.textContent = displayStr;
@@ -169,13 +170,15 @@ neg.addEventListener("click", () => {
 
 percent.addEventListener("click", () => {
   display.textContent = displayStr + "%";
-  percentProb = true;
-  if (num1 !== "") {
+  if (num2 !== "") {
     num2 = parseFloat(displayStr);
     percentNum = num2;
+    percentProb = true;
   } else {
-    num1 = parseFloat(displayStr);
-    percentNum = num1;
+    percentProb = false;
+    num1 = parseFloat(displayStr / 100);
+    displayStr = num1;
+    console.log(num1);
   }
 });
 
