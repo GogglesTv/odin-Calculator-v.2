@@ -63,6 +63,37 @@ function resetOperator() {
   });
 }
 
+document.addEventListener("keyup", (e) => {
+  if (parseFloat(e.key) <= 9 || parseFloat(e.key) >= 0) {
+    const numberValue = parseFloat(e.key);
+
+    if (num1 !== "") {
+      if (result !== "") {
+        if (displayStr.includes(".")) {
+          displayStr += numberValue;
+          display.textContent = displayStr;
+          num2 = parseFloat(displayStr);
+        } else {
+          result = "";
+          resetDisplay();
+          displayStr += numberValue;
+          display.textContent = displayStr;
+          num2 = parseFloat(displayStr);
+        }
+      } else {
+        displayStr += numberValue;
+        display.textContent = displayStr;
+        num2 = parseFloat(displayStr);
+      }
+    } else {
+      displayStr += numberValue;
+      display.textContent = displayStr;
+    }
+  }
+
+  console.log(e.key, e);
+});
+
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
     const numberValue = number.getAttribute("data-value");
