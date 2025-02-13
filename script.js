@@ -73,6 +73,17 @@ function operatorChosen() {
   resetDisplay();
 }
 
+function backSpace() {
+  if (displayStr.length === 1 && result !== "") {
+    resetDisplay();
+  } else if (result === "") {
+  } else {
+    console.log(num1, num2, result);
+    displayStr = displayStr.slice(0, -1);
+    display.textContent = displayStr;
+  }
+}
+
 document.addEventListener("keyup", (e) => {
   if (parseFloat(e.key) <= 9 || parseFloat(e.key) >= 0) {
     const numberValue = parseFloat(e.key);
@@ -145,6 +156,10 @@ document.addEventListener("keyup", (e) => {
     }
     display.textContent = displayStr;
     resetOperator();
+  }
+
+  if (e.key === "Backspace") {
+    backSpace();
   }
   console.log(e.key, e);
 });
@@ -263,10 +278,5 @@ percent.addEventListener("click", () => {
 });
 
 bkSpace.addEventListener("click", () => {
-  if (displayStr.length === 1) {
-    resetDisplay();
-  } else {
-    displayStr = displayStr.slice(0, -1);
-    display.textContent = displayStr;
-  }
+  backSpace();
 });
