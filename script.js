@@ -74,11 +74,10 @@ function operatorChosen() {
 }
 
 function backSpace() {
-  if (displayStr.length === 1 && result !== "") {
+  console.log(displayStr.length);
+  if (displayStr.length === 1 || displayStr.length === 0) {
     resetDisplay();
-  } else if (result === "") {
   } else {
-    console.log(num1, num2, result);
     displayStr = displayStr.slice(0, -1);
     display.textContent = displayStr;
   }
@@ -161,7 +160,6 @@ document.addEventListener("keyup", (e) => {
   if (e.key === "Backspace") {
     backSpace();
   }
-  console.log(e.key, e);
 });
 
 numbers.forEach((number) => {
@@ -251,6 +249,7 @@ allClear.addEventListener("click", () => {
   resetDisplay();
   resetOperator();
   num1 = 0;
+  num2 = 0;
 });
 
 neg.addEventListener("click", () => {
