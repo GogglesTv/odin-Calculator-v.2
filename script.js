@@ -196,6 +196,8 @@ operators.forEach((operator) => {
     operator.style.backgroundColor = "#6a6a6a";
     if (operator.textContent === "x") {
       operation = "*";
+    } else if (operator.textContent === "÷") {
+      operation = "/";
     } else {
       operation = operator.textContent;
     }
