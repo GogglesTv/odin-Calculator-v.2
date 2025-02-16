@@ -115,6 +115,21 @@ function backSpace() {
   }
 }
 
+function addDecimal() {
+  if (displayStr % 1 === 0) {
+    if (displayStr === "") {
+      displayStr = "0.";
+      display.textContent = displayStr;
+      console.log(displayStr);
+      decimal.disabled = "true";
+    } else if (!displayStr.includes(".")) {
+      displayStr += ".";
+      display.textContent = displayStr;
+      decimal.disabled = "true";
+    }
+  }
+}
+
 document.addEventListener("keyup", (e) => {
   if (parseFloat(e.key) <= 9 || parseFloat(e.key) >= 0) {
     const numberValue = parseFloat(e.key);
@@ -168,6 +183,8 @@ document.addEventListener("keyup", (e) => {
     operationComplete();
   } else if (e.key === "Backspace") {
     backSpace();
+  } else if (e.key === ".") {
+    addDecimal();
   }
 });
 
@@ -220,22 +237,7 @@ equals.addEventListener("click", () => {
 });
 
 decimal.addEventListener("click", () => {
-  if (displayStr % 1 === 0) {
-    if (displayStr === "") {
-      displayStr = "0.";
-      display.textContent = displayStr;
-      console.log(displayStr);
-      decimal.disabled = "true";
-    } else if (num2 === "") {
-      displayStr = "0.";
-      display.textContent = displayStr;
-      decimal.disabled = "true";
-    } else {
-      displayStr += ".";
-      display.textContent = displayStr;
-      decimal.disabled = "true";
-    }
-  }
+  addDecimal();
 });
 
 allClear.addEventListener("click", () => {
