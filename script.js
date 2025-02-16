@@ -174,16 +174,21 @@ document.addEventListener("keyup", (e) => {
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
     const numberValue = number.getAttribute("data-value");
-
-    if (num1 !== "") {
-      if (result !== "") {
-        if (displayStr.includes(".")) {
-          displayStr += numberValue;
-          display.textContent = displayStr;
-          num2 = parseFloat(displayStr);
+    if (displayStr.length <= 8) {
+      if (num1 !== "") {
+        if (result !== "") {
+          if (displayStr.includes(".")) {
+            displayStr += numberValue;
+            display.textContent = displayStr;
+            num2 = parseFloat(displayStr);
+          } else {
+            result = "";
+            resetDisplay();
+            displayStr += numberValue;
+            display.textContent = displayStr;
+            num2 = parseFloat(displayStr);
+          }
         } else {
-          result = "";
-          resetDisplay();
           displayStr += numberValue;
           display.textContent = displayStr;
           num2 = parseFloat(displayStr);
@@ -191,11 +196,7 @@ numbers.forEach((number) => {
       } else {
         displayStr += numberValue;
         display.textContent = displayStr;
-        num2 = parseFloat(displayStr);
       }
-    } else {
-      displayStr += numberValue;
-      display.textContent = displayStr;
     }
   });
 });
