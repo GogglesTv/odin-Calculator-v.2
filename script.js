@@ -73,6 +73,39 @@ function operatorChosen() {
   resetDisplay();
 }
 
+function operationComplete() {
+  if (operation === "") {
+    if (percentProb === true) {
+      console.log(percentNum);
+      displayStr = percentNum / 100;
+      num1 = displayStr;
+      percentProb = false;
+    }
+  } else if (operation !== "") {
+    if (percentProb === true) {
+      if (percentNum === num2) {
+        num2 = (num1 / 100) * num2;
+        displayStr = operate(operation, num1, num2);
+        result = operate(operation, num1, num2);
+        console.log(num1, operation, num2, "=", result);
+      }
+      percentProb = false;
+    } else {
+      num2 = parseFloat(displayStr);
+      displayStr = operate(operation, num1, num2);
+      result = operate(operation, num1, num2);
+      console.log(num1, operation, num2, "=", result);
+      if (displayStr % 1 !== 0) {
+        displayStr = 1 * parseFloat(displayStr).toFixed(3);
+        display.textContent = displayStr;
+      }
+    }
+  }
+
+  display.textContent = displayStr;
+  resetOperator();
+}
+
 function backSpace() {
   console.log(displayStr.length);
   if (displayStr.length === 1 || displayStr.length === 0) {
@@ -133,31 +166,8 @@ document.addEventListener("keyup", (e) => {
     divide.style.backgroundColor = "#6a6a6a";
     operatorChosen();
   } else if (e.key === "=" || e.key === "Enter") {
-    if (operation !== "") {
-      if (percentProb === true) {
-        if (percentNum === num2) {
-          num2 = (num1 / 100) * num2;
-          displayStr = operate(operation, num1, num2);
-          result = operate(operation, num1, num2);
-          console.log(num1, operation, num2, "=", result);
-          percentProb = false;
-          if (displayStr % 1 !== 0) {
-            displayStr = 1 * parseFloat(displayStr).toFixed(3);
-            display.textContent = displayStr;
-          }
-        }
-      } else {
-        num2 = parseFloat(displayStr);
-        displayStr = operate(operation, num1, num2);
-        result = operate(operation, num1, num2);
-        console.log(num1, operation, num2, "=", result);
-      }
-    }
-    display.textContent = displayStr;
-    resetOperator();
-  }
-
-  if (e.key === "Backspace") {
+    operationComplete();
+  } else if (e.key === "Backspace") {
     backSpace();
   }
 });
@@ -206,30 +216,7 @@ operators.forEach((operator) => {
 });
 
 equals.addEventListener("click", () => {
-  console.log(num1);
-  if (operation !== "") {
-    if (percentProb === true) {
-      if (percentNum === num2) {
-        num2 = (num1 / 100) * num2;
-        displayStr = operate(operation, num1, num2);
-        result = operate(operation, num1, num2);
-        console.log(num1, operation, num2, "=", result);
-        percentProb = false;
-        if (displayStr % 1 !== 0) {
-          displayStr = 1 * parseFloat(displayStr).toFixed(3);
-          display.textContent = displayStr;
-        }
-      }
-    } else {
-      num2 = parseFloat(displayStr);
-      displayStr = operate(operation, num1, num2);
-      result = operate(operation, num1, num2);
-      console.log(num1, operation, num2, "=", result);
-    }
-  }
-
-  display.textContent = displayStr;
-  resetOperator();
+  operationComplete();
 });
 
 decimal.addEventListener("click", () => {
