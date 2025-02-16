@@ -144,6 +144,13 @@ function percentButton() {
   }
 }
 
+function allClearBtn() {
+  resetDisplay();
+  resetOperator();
+  num1 = 0;
+  num2 = 0;
+}
+
 document.addEventListener("keyup", (e) => {
   if (parseFloat(e.key) <= 9 || parseFloat(e.key) >= 0) {
     const numberValue = parseFloat(e.key);
@@ -201,6 +208,8 @@ document.addEventListener("keyup", (e) => {
     addDecimal();
   } else if (e.key === "%") {
     percentButton();
+  } else if (e.key === "c") {
+    allClearBtn();
   }
 });
 
@@ -257,10 +266,7 @@ decimal.addEventListener("click", () => {
 });
 
 allClear.addEventListener("click", () => {
-  resetDisplay();
-  resetOperator();
-  num1 = 0;
-  num2 = 0;
+  allClearBtn();
 });
 
 neg.addEventListener("click", () => {
