@@ -77,7 +77,7 @@ function operationComplete() {
   if (operation === "") {
     if (percentProb === true) {
       console.log(percentNum);
-      displayStr = percentNum / 100;
+      displayStr = parseFloat(percentNum / 100);
       num1 = displayStr;
       percentProb = false;
     }
@@ -95,11 +95,11 @@ function operationComplete() {
       displayStr = operate(operation, num1, num2);
       result = operate(operation, num1, num2);
       console.log(num1, operation, num2, "=", result);
-      if (displayStr % 1 !== 0) {
-        displayStr = 1 * parseFloat(displayStr).toFixed(3);
-        display.textContent = displayStr;
-      }
     }
+  }
+
+  if (displayStr.toString().length >= 10) {
+    displayStr = displayStr.toExponential(3);
   }
 
   display.textContent = displayStr;
