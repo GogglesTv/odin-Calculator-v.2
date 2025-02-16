@@ -107,7 +107,6 @@ function operationComplete() {
 }
 
 function backSpace() {
-  console.log(displayStr.length);
   if (displayStr.length === 1 || displayStr.length === 0) {
     resetDisplay();
   } else {
