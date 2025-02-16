@@ -113,6 +113,7 @@ function backSpace() {
     displayStr = displayStr.slice(0, -1);
     display.textContent = displayStr;
   }
+  decimal.disabled = false;
 }
 
 function addDecimal() {
