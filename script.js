@@ -130,6 +130,20 @@ function addDecimal() {
   }
 }
 
+function percentButton() {
+  display.textContent = displayStr + "%";
+  if (num2 !== "") {
+    num2 = parseFloat(displayStr);
+    percentNum = num2;
+    percentProb = true;
+  } else {
+    percentProb = false;
+    num1 = parseFloat(displayStr / 100);
+    displayStr = num1;
+    console.log(num1);
+  }
+}
+
 document.addEventListener("keyup", (e) => {
   if (parseFloat(e.key) <= 9 || parseFloat(e.key) >= 0) {
     const numberValue = parseFloat(e.key);
@@ -185,6 +199,8 @@ document.addEventListener("keyup", (e) => {
     backSpace();
   } else if (e.key === ".") {
     addDecimal();
+  } else if (e.key === "%") {
+    percentButton();
   }
 });
 
@@ -258,17 +274,7 @@ neg.addEventListener("click", () => {
 });
 
 percent.addEventListener("click", () => {
-  display.textContent = displayStr + "%";
-  if (num2 !== "") {
-    num2 = parseFloat(displayStr);
-    percentNum = num2;
-    percentProb = true;
-  } else {
-    percentProb = false;
-    num1 = parseFloat(displayStr / 100);
-    displayStr = num1;
-    console.log(num1);
-  }
+  percentButton();
 });
 
 bkSpace.addEventListener("click", () => {
